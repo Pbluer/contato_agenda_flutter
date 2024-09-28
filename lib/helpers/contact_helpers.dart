@@ -1,6 +1,5 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'package:async/async.dart';
 
 const String contactTable = "contactTable";
 const String idColumn = 'idColumn';
@@ -36,7 +35,7 @@ class ContactHelpers{
 
     return await openDatabase(path,version: 1, onCreate: ( Database db,int newerVersion ) async{
       await db.execute(
-        "CREATE TABLE $contactTable($idColumn INT PRIMARY KEY, $nameColumn TEXT, $emailColumn TEXT, $phoneColumn TEXT, $imgColumn TEXT)"
+        "CREATE TABLE $contactTable($idColumn INTEGER PRIMARY KEY, $nameColumn TEXT, $emailColumn TEXT, $phoneColumn TEXT, $imgColumn TEXT)"
       );
     });
   }
@@ -103,11 +102,11 @@ class ContactHelpers{
 
 class Contact{
 
-  late int id;
-  late String name;
-  late String email;
-  late String phone;
-  late String img;
+  int? id;
+  String? name;
+  String? email;
+  String? phone;
+  String? img;
 
   Contact();
 

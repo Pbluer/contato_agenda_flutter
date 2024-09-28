@@ -1,8 +1,9 @@
-import "package:flutter/material.dart";
 import 'package:contato_agenda/ui/homePage.dart';
+import "package:flutter/material.dart";
 
 void main(){
-  return runApp( MaterialApp(
+  return runApp( const MaterialApp(
     home: Homepage(),
+    debugShowCheckedModeBanner: false,
   ));
 }
