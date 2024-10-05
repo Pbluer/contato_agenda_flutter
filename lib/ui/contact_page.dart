@@ -42,7 +42,10 @@ class _ContactPageState extends State<ContactPage> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      onPopInvoked: (context){},
+      canPop: true,
+      onPopInvoked: (context){
+        _requestPop();
+      },
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Novo Contato"),
@@ -70,12 +73,10 @@ class _ContactPageState extends State<ContactPage> {
                   child:  Container(
                     width: 80.0,
                     height: 80.0,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: _editedContact!.img != null
-                              ? FileImage(File(_editedContact!.img!))
-                              : const AssetImage("imagens/person.png"),
+                          image: AssetImage("imagens/person.png"),
                         )),
                   ),
                 ),
@@ -120,7 +121,7 @@ class _ContactPageState extends State<ContactPage> {
     );
   }
 
-  void _requestPop(){
+  Future<bool> _requestPop(){
     if( _userEdited ){
       showDialog(
           context: context,
@@ -134,16 +135,21 @@ class _ContactPageState extends State<ContactPage> {
                     onPressed: (){
                       Navigator.pop(context);
                     },
-                    child: const Text("Sim")
+                    child: const Text("Não")
                 ),
                 TextButton(
-                    onPressed: (){},
-                    child: const Text("Não")
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Sim")
                 )
               ],
             );
           }
       );
+      return Future.value(true);
+    }else{
+      return Future.value(true);
     }
   }
 }
